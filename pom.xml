@@ -21,6 +21,7 @@
     <modules>
         <module>test_cloud</module>
         <module>jczong-gateway</module>
+        <module>jczong_ai</module>
     </modules>
 
     <properties>

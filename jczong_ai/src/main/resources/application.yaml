@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: jczong-ai
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        serverAddr: 192.168.222.1:8848
+        username: 'nacos'
+        password: 'nacos'
+        ephemeral: false # 设为持久化实例
+        heart-beat-enabled: true # 开启心跳
+        heart-beat-interval: 5000 # 心跳间隔 5 秒
+        heart-beat-timeout: 15000 # 15 秒无心跳标记为非健康
+      config:
+        serverAddr: 192.168.222.1:8848
+        username: 'nacos'
+        password: 'nacos'
+#  config:
+#    import:
+#      - nacos:${spring.application.name}-${spring.profiles.active}.yml?refreshEnabled=true
+  ai:
+    dashscope:
+      api-key: sk-77e66e864a83450383c9c3dbc88444ad
+server:
+  port: 8002
+  servlet:
+    encoding:
+      enabled: true
+      force: true
+      charset: UTF-8

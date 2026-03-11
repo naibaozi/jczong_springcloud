@@ -1,6 +1,9 @@
+server:
+  port: 8003
+
 spring:
   application:
-    name: test-cloud
+    name: jczong-gateway
   profiles:
     active: dev
   cloud:
@@ -20,5 +23,20 @@ spring:
   config:
     import:
       - nacos:${spring.application.name}-${spring.profiles.active}.yml?refreshEnabled=true
-server:
-  port: 8001
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      access: read_only
+
+# 添加日志配置，便于调试
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.client.discovery: DEBUG
+    org.springframework.cloud.loadbalancer: DEBUG

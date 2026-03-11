@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const MICRO_SERVICE_CONFIG = {
   // 业务标识: 对应的基础地址
-  test: 'http://192.168.222.1:8001',    // 测试
+  test: 'http://192.168.222.1:8003',    // 测试
 
 }
 
