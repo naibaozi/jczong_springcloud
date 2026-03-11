@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: test-cloud
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        serverAddr: 192.168.222.1:8848
+        username: 'nacos'
+        password: 'nacos'
+        ephemeral: false # 设为持久化实例
+        heart-beat-enabled: true # 开启心跳
+        heart-beat-interval: 5000 # 心跳间隔5秒
+        heart-beat-timeout: 15000 # 15秒无心跳标记为非健康
+      config:
+        serverAddr: 127.0.0.1:8848
+        username: 'nacos'
+        password: 'nacos'
+  config:
+    import:
+      - nacos:${spring.application.name}-${spring.profiles.active}.yml?refreshEnabled=true
+server:
+  port: 8001

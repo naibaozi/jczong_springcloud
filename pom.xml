@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.7</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!-- 核心工程信息保留 -->
+    <groupId>com.web</groupId>
+    <artifactId>jczong_springcloud</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>jczong_springcloud</name>
+    <description>jczong_springcloud</description>
+
+    <!-- 模块聚合保留 -->
+    <modules>
+        <module>test_cloud</module>
+    </modules>
+
+    <properties>
+        <java.version>25</java.version>
+        <!-- Spring Cloud 版本 -->
+        <spring-cloud.version>2025.0.0</spring-cloud.version>
+        <!-- 新增 Spring Cloud Alibaba 版本管理（可选，推荐添加，避免子工程版本冲突） -->
+        <spring-cloud-alibaba.version>2025.0.0.0</spring-cloud-alibaba.version>
+    </properties>
+
+    <!-- 依赖管理（父工程建议用 dependencyManagement 统一管理版本，而非直接引入依赖） -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Cloud 版本管理 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Cloud Alibaba 版本管理 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-spring-context</artifactId>
+                <version>${latest.version}</version>
+            </dependency>
+
+            <!-- 通用依赖版本管理（子工程按需引入） -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>4.0.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 父工程仅保留通用、必要的依赖（无业务相关依赖） -->
+    <dependencies>
+        <!-- Lombok 通用工具（父工程统一引入，子工程直接使用） -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 编译插件保留（基础编译能力） -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
+            <!-- 移除 native 插件（非基础需求） -->
+
+            <!-- Spring Boot 打包插件保留（子工程打包需要） -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
