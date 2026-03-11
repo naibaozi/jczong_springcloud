@@ -20,6 +20,7 @@
     <!-- 模块聚合保留 -->
     <modules>
         <module>test_cloud</module>
+        <module>jczong-gateway</module>
     </modules>
 
     <properties>
