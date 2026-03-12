@@ -1,28 +1,22 @@
 server:
-  port: 8003
+  port: 8000
 
 spring:
   application:
     name: jczong-gateway
-  profiles:
-    active: dev
   cloud:
     nacos:
       discovery:
         serverAddr: 192.168.222.1:8848
         username: 'nacos'
         password: 'nacos'
-        ephemeral: false # 设为持久化实例
-        heart-beat-enabled: true # 开启心跳
-        heart-beat-interval: 5000 # 心跳间隔5秒
-        heart-beat-timeout: 15000 # 15秒无心跳标记为非健康
       config:
         serverAddr: 192.168.222.1:8848
         username: 'nacos'
         password: 'nacos'
   config:
     import:
-      - nacos:${spring.application.name}-${spring.profiles.active}.yml?refreshEnabled=true
+      - nacos:jczong-gateway.yaml?refreshEnabled=true
 management:
   endpoints:
     web:
@@ -31,8 +25,6 @@ management:
   endpoint:
     health:
       show-details: always
-    gateway:
-      access: read_only
 
 # 添加日志配置，便于调试
 logging:

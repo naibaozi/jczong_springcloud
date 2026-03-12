@@ -1,8 +1,8 @@
+server:
+  port: 8001
 spring:
   application:
     name: test-cloud
-  profiles:
-    active: dev
   cloud:
     nacos:
       discovery:
@@ -19,6 +19,8 @@ spring:
         password: 'nacos'
   config:
     import:
-      - nacos:${spring.application.name}-${spring.profiles.active}.yml?refreshEnabled=true
-server:
-  port: 8001
+      - nacos:test-cloud.yaml?refreshEnabled=true
+#      - nacos:CorsConfig-dev?refreshEnabled=true
+logging:
+  level:
+    com.alibaba.cloud.nacos.configdata: debug

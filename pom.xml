@@ -17,11 +17,13 @@
     <name>jczong_springcloud</name>
     <description>jczong_springcloud</description>
 
+
     <!-- 模块聚合保留 -->
     <modules>
         <module>test_cloud</module>
         <module>jczong-gateway</module>
         <module>jczong_ai</module>
+        <module>nacos_config</module>
     </modules>
 
     <properties>

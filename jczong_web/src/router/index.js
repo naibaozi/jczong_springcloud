@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { useUserStore } from '@/store/user'
-import Index  from '@/views/index.vue'
-import Test from '@/views/test.vue'
 
 
 const routes = [
@@ -14,7 +12,7 @@ const routes = [
     {
         path: '/index',
         name: 'Index', // 大驼峰命名
-        component: Index,
+        component: () => import('@/views/index.vue'),
         meta: {
             requireAuth: false
         }
@@ -22,11 +20,19 @@ const routes = [
     {
         path: '/test',
         name: 'test',
-        component: Test,
+        component: () => import('@/views/test.vue'),
         meta: {
             requireAuth: false // 不需要登录
         }
-    }
+    },
+    {
+        path: '/chat',
+        name: 'Chat',
+        component: () => import('@/views/chat.vue'),
+        meta: {
+            requireAuth: false // 不需要登录
+        }
+    },
 ]
 
 const router = createRouter({
